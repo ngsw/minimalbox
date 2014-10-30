@@ -5,7 +5,7 @@ minimalbox
     .
     ├── builders
     │   └── ks.cfg
-    ├── centos65.json
+    ├── centos66.json
     └── provisioners
         ├── 01_selinux_disabled.sh
         ├── 02_yumconf.sh
