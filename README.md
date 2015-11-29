@@ -6,7 +6,7 @@ minimalbox
     |-- README.md
     |-- builders
     |   `-- ks.cfg
-    |-- centos7.1503.json
+    |-- centos7.1-1503.json
     |-- json-gen.sh
     `-- provisioners
         |-- 01_hosts_allow_deny_rewrite.sh
