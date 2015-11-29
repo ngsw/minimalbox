@@ -1,11 +1,12 @@
-CENTOS_VER_MAJOR="6"
-CENTOS_VER_MINOR="7"
-CENTOS_VER="${CENTOS_VER_MAJOR}.${CENTOS_VER_MINOR}"
+CENTOS_VER_MAJOR="7"
+CENTOS_VER_MINOR="1"
+CENTOS_VER_TIMESTAMP="1503"
+CENTOS_VER="${CENTOS_VER_MAJOR}.${CENTOS_VER_MINOR}-${CENTOS_VER_TIMESTAMP}"
 ARCH_TYPE="x86_64"
 CHECKSUM_TYPE="md5"
-CHECKSUM="9381a24b8bee2fed0c26896141a64b69"
+CHECKSUM="d07ab3e615c66a8b2e9a50f4852e6a77"
 
-cat > ./centos${CENTOS_VER_MAJOR}${CENTOS_VER_MINOR}.json <<JSONEOF
+cat > ./centos${CENTOS_VER}.json <<JSONEOF
 {
   "builders": [
     {
@@ -16,7 +17,7 @@ cat > ./centos${CENTOS_VER_MAJOR}${CENTOS_VER_MINOR}.json <<JSONEOF
       "guest_os_type": "RedHat_64",
       "iso_checksum": "${CHECKSUM}",
       "iso_checksum_type": "${CHECKSUM_TYPE}",
-      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/${CENTOS_VER}/isos/${ARCH_TYPE}/CentOS-${CENTOS_VER}-${ARCH_TYPE}-minimal.iso",
+      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/${CENTOS_VER_MAJOR}/isos/${ARCH_TYPE}/CentOS-${CENTOS_VER_MAJOR}-${ARCH_TYPE}-Minimal-${CENTOS_VER_TIMESTAMP}-01.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -48,23 +49,27 @@ cat > ./centos${CENTOS_VER_MAJOR}${CENTOS_VER_MINOR}.json <<JSONEOF
     {
       "type": "shell",
       "scripts": [
-        "provisioners/01_selinux_disabled.sh",
-        "provisioners/02_yumconf.sh",
-        "provisioners/03_sshd_config_rewrite.sh",
-        "provisioners/04_iptables_rewrite.sh",
-        "provisioners/05_yum_install_remove_chkconfig.sh",
-        "provisioners/06_i18n_rewrite.sh",
-        "provisioners/07_resolvconf_rewrite.sh",
+        "provisioners/01_hosts_allow_deny_rewrite.sh",
+        "provisioners/02_selinux_disabled.sh",
+        "provisioners/03_yumconf.sh",
+        "provisioners/04_sshd_config_rewrite.sh",
+        "provisioners/05_firewalld-disable.sh",
+        "provisioners/06_yum_install_remove_chkconfig.sh",
+        "provisioners/07_locale_and_timezone.sh",
         "provisioners/08_kernel_param.sh",
         "provisioners/09_pam_limits.sh",
         "provisioners/10_logrotate_rewrite.sh",
         "provisioners/11_bashrc_org.sh",
         "provisioners/12_ntpd_conf_rewrite.sh",
-        "provisioners/13_ipv6_disabled_reboot.sh",
-        "provisioners/14_symboliclink_bash_perl.sh",
-        "provisioners/15_virtualbox.sh",
-        "provisioners/16_vagrant_user.sh",
-        "provisioners/17_delete_70-persistent-net.rules.sh"
+        "provisioners/13_symboliclink_bash_perl.sh",
+        "provisioners/14_vm_swappiness_0.sh",
+        "provisioners/15_rsyslog_rate-limiting_disable.sh",
+        "provisioners/16_resolvconf_rewrite.sh",
+        "provisioners/17_virtualbox.sh",
+        "provisioners/18_vagrant_user.sh",
+        "provisioners/19_delete_70-persistent-net.rules.sh",
+        "provisioners/20_append_authorized_keys.sh",
+        "provisioners/21_hostname.sh"
       ],
       "override": {
         "virtualbox-iso": {

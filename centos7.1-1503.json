@@ -6,9 +6,9 @@
       "boot_wait": "10s",
       "disk_size": 512000,
       "guest_os_type": "RedHat_64",
-      "iso_checksum": "9381a24b8bee2fed0c26896141a64b69",
+      "iso_checksum": "d07ab3e615c66a8b2e9a50f4852e6a77",
       "iso_checksum_type": "md5",
-      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/6.7/isos/x86_64/CentOS-6.7-x86_64-minimal.iso",
+      "iso_url": "http://ftp.iij.ad.jp/pub/linux/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1503-01.iso",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -40,23 +40,27 @@
     {
       "type": "shell",
       "scripts": [
-        "provisioners/01_selinux_disabled.sh",
-        "provisioners/02_yumconf.sh",
-        "provisioners/03_sshd_config_rewrite.sh",
-        "provisioners/04_iptables_rewrite.sh",
-        "provisioners/05_yum_install_remove_chkconfig.sh",
-        "provisioners/06_i18n_rewrite.sh",
-        "provisioners/07_resolvconf_rewrite.sh",
+        "provisioners/01_hosts_allow_deny_rewrite.sh",
+        "provisioners/02_selinux_disabled.sh",
+        "provisioners/03_yumconf.sh",
+        "provisioners/04_sshd_config_rewrite.sh",
+        "provisioners/05_firewalld-disable.sh",
+        "provisioners/06_yum_install_remove_chkconfig.sh",
+        "provisioners/07_locale_and_timezone.sh",
         "provisioners/08_kernel_param.sh",
         "provisioners/09_pam_limits.sh",
         "provisioners/10_logrotate_rewrite.sh",
         "provisioners/11_bashrc_org.sh",
         "provisioners/12_ntpd_conf_rewrite.sh",
-        "provisioners/13_ipv6_disabled_reboot.sh",
-        "provisioners/14_symboliclink_bash_perl.sh",
-        "provisioners/15_virtualbox.sh",
-        "provisioners/16_vagrant_user.sh",
-        "provisioners/17_delete_70-persistent-net.rules.sh"
+        "provisioners/13_symboliclink_bash_perl.sh",
+        "provisioners/14_vm_swappiness_0.sh",
+        "provisioners/15_rsyslog_rate-limiting_disable.sh",
+        "provisioners/16_resolvconf_rewrite.sh",
+        "provisioners/17_virtualbox.sh",
+        "provisioners/18_vagrant_user.sh",
+        "provisioners/19_delete_70-persistent-net.rules.sh",
+        "provisioners/20_append_authorized_keys.sh",
+        "provisioners/21_hostname.sh"
       ],
       "override": {
         "virtualbox-iso": {
@@ -68,7 +72,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "./CentOS-6.7-x86_64-minimal.box"
+      "output": "./CentOS-7.1-1503-x86_64-minimal.box"
     }
   ]
 }
