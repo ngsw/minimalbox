@@ -19,7 +19,6 @@ timeout=300
 # Note: yum-RHN-plugin doesn't honor this.
 metadata_expire=3600
 
-# Default.
 installonly_limit=2
 
 # PUT YOUR REPOS HERE OR IN separate files named file.repo
